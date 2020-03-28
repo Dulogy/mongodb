@@ -37,12 +37,12 @@ db.familyFriends.find({$or:[{name:"durgesh"},{age:{$gt:"20"}]})
 
 
 4)update database collection records
-// update query in database collection ( update only one record thats match conditions foremost if many records match)
+// update query in database collection ( update only one record(document) thats match conditions foremost if many records match)
 
 db.familyFriends.updateOne({ name:"durgesh"} ,{$set:{name:"durgesh_Kumar"}})
 
 
-// update all  records where given  condition  match
+// update all  records (document) where given  condition  match
 db.familyFriends.updateMany({ age:"21"} ,{$set:{age:"20"}})
 
 //add a field in whole collection
@@ -53,4 +53,11 @@ in the above example last 2 fields false, true specifies the upsert and multi fl
 Upsert: If set to true, creates a new document when no document matches the query criteria.
 Multi: If set to true, updates multiple documents that meet the query criteria. If set to false, updates one document.
 
+
 5) delete records in database collection 
+db.familyFriends.deleteOne({name:"durgesh"})     // delete one record only
+db.familyFriends.deleteMany({age:{$gt:"20"}})    // delete all the records where condition match
+db.familyFriends.deleteMany({})                  // delete all the documents of a collection
+
+
+
