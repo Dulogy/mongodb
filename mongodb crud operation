@@ -1,0 +1,56 @@
+// crud operation in mongodb
+1)create or use database
+show dbs      // command  to see all databases
+
+//use databasename     ---> it creates a database if not exits otherwise you can use existing database
+use family
+
+// making collection in database     
+(db.collectionName.insertOne/insertMany)  ---> it creates a collection with insert single/ multiple  input record
+
+
+2) insertion in database collections 
+// insert one record will be like  (every record is a object in mongodb)
+db.failyDetails.insertOne({name:"durgesh",age:"21"})
+
+
+// insert multiple records in collection be like    (multiple record in mongodb is array of objects)
+db.familyDetails.insertMany([{name:"satinder",age:"19"},{name:"rahul",age:"21"},{name:"rishav",age:"20"}])
+
+
+3) read database records
+// if you want to see/read  whole details with unique id  then type
+//db.collectionName.find()  ---> it shows all the data
+db.familyDetails.find()
+
+
+// read query in databse collection
+db.familyDetails.find({name:"durgesh"})       --> simple query for name durgesh it gives all information where nae is durgesh
+
+
+// AND operator query   ---> $ specifies mongodb operation   gt=greaten than  notice comma(,)between both fields
+db.familyDetals.find( {name:"durgesh , age:{$gt:"20"}})  --> shows all data where both conditions match
+
+
+// OR  operator query      ---> carefully look at operation and syntax  between OR & AND OPERATION
+db.familyFriends.find({$or:[{name:"durgesh"},{age:{$gt:"20"}]})
+
+
+4)update database collection records
+// update query in database collection ( update only one record thats match conditions foremost if many records match)
+
+db.familyFriends.updateOne({ name:"durgesh"} ,{$set:{name:"durgesh_Kumar"}})
+
+
+// update all  records where given  condition  match
+db.familyFriends.updateMany({ age:"21"} ,{$set:{age:"20"}})
+
+//add a field in whole collection
+db.familyFriends.update({},{$set:{lastname:"friends"}},false,true)
+
+it creates empty field object and set the required data which we want to set
+in the above example last 2 fields false, true specifies the upsert and multi flags.
+Upsert: If set to true, creates a new document when no document matches the query criteria.
+Multi: If set to true, updates multiple documents that meet the query criteria. If set to false, updates one document.
+
+5) delete records in database collection 
